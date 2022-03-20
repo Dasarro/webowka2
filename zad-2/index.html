@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Zadanie2</title>
+    <link rel="stylesheet" href="../bootstrap.min.css" />
+    <link rel="stylesheet" href="../normalize.css" />
+  </head>
+  <body class="bg-info bg-opacity-10">
+    <div class="container pb-3 bg-white">
+      <h2 class="py-2">Please enter package and dimensions</h2>
+      <form id="form">
+        <div class="form-group mb-3">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Enter name"
+            required
+            maxlength="20"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="width">Width</label>
+          <div class="input-group">
+            <input
+              type="number"
+              class="form-control"
+              id="width"
+              name="width"
+              placeholder="Enter width"
+              required
+              min="1"
+              max="1000"
+            />
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend2">cm</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="height">Height</label>
+          <div class="input-group">
+            <input
+              type="number"
+              class="form-control"
+              id="height"
+              name="height"
+              placeholder="Enter height"
+              required
+              min="1"
+              max="1000"
+            />
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend2">cm</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="depth">Depth</label>
+          <div class="input-group">
+            <input
+              type="number"
+              class="form-control"
+              id="depth"
+              name="depth"
+              placeholder="Enter depth"
+              required
+              min="1"
+              max="1000"
+            />
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend2">cm</span>
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Confirm" />
+        <input type="reset" class="btn btn-secondary" value="Clear" />
+      </form>
+
+      <hr />
+
+      <h2 class="py-2">Packages</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="w-50">Name</th>
+            <th scope="col">Width</th>
+            <th scope="col">Height</th>
+            <th scope="col">Depth</th>
+            <th scope="col">Volume</th>
+          </tr>
+        </thead>
+        <tbody id="table-entries">
+
+        </tbody>
+        <tfoot>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="text-end" id="total-volume">0</td>
+        </tfoot>
+      </table>
+    </div>
+
+    <script>
+      let total = 0;
+
+      const onSubmit = event => {
+        const table = document.getElementById("table-entries");
+        const form = document.getElementById("form");
+
+        const width = form.elements.width.value;
+        const height = form.elements.height.value;
+        const depth = form.elements.depth.value;
+        const volume = width * height * depth / 1000000;
+
+        const newRow = table.insertRow(-1);
+        newRow.insertCell().innerText = width;
+        newRow.insertCell().innerText = height;
+        newRow.insertCell().innerText = depth;
+        newRow.insertCell().innerText = volume.toFixed(2);
+
+        for (const cell of newRow.cells) {
+          cell.classList.add("text-end");
+        }
+
+        newRow.insertCell(0).innerText = form.elements.name.value;
+
+        total += volume;
+        document.getElementById("total-volume").innerText = total.toFixed(2);
+
+        event.preventDefault();
+      }
+
+      document.getElementById("form").addEventListener('submit', onSubmit);
+    </script>
+  </body>
+</html>

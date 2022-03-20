@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadanie1</title>
+</head>
+<body>
+    <input type="range" min="10" max="500" />
+    <div style="background-color: aqua; border-radius: 50%; display: flex; align-items: center; justify-content: center;"></div>
+    <script>
+        const circle = document.querySelector('div');
+        const input = document.querySelector('input');
+
+        const changeValue = diameter => {
+            circle.style.width = diameter;
+            circle.style.height = diameter;
+            circle.innerText = diameter;
+        }
+
+        changeValue(`${input.value}px`);
+
+        input.addEventListener('input', event => { 
+            changeValue(`${input.value}px`);
+        });
+    </script>
+</body>
+</html>
+
